@@ -4,7 +4,7 @@ import * as Clients from '../app/clients';
 
 const fakeSocket = {
   write: function(event) {
-    this.notificedEvent = event;
+    this.notifiedEvent = event;
   }
 }
 
@@ -32,4 +32,22 @@ describe('Clients', () => {
     chai.expect(socketsSpy).to.have.been.called;
     done();
   });
+
+  // describe('allows', () => {
+  //   it('a client to follow another', done => {
+  //     done();
+  //   });
+  //
+  //   it('a client to unfollow another', done => {
+  //     done();
+  //   });
+  //
+  //   it('a client to update his/her status', done => {
+  //     done();
+  //   });
+  //
+  //   it('a client to message another', done => {
+  //     done();
+  //   });
+  // });
 });
