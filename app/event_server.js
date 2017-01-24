@@ -2,8 +2,6 @@ import net from 'net';
 import * as Clients from './clients';
 
 const _eventHandler = function(socket) {
-  console.log(`Event sever running on port 9090`);
-
   socket.setEncoding('utf8');
 
   // handle data from client
