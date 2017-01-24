@@ -1,0 +1,17 @@
+{
+  "name": "follower-maze",
+  "version": "0.0.0",
+  "description": "my solution to SoundCloud's follower-maze challenge",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "babel-node --presets es2015 app/index.js"
+  },
+  "author": "Winnie Ngo",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
