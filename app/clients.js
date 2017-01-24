@@ -1,4 +1,4 @@
-const clients = {}; // object storing all connected clients by id
+let clients = {}; // object storing all connected clients by id
 
 const _notifyClient = (id, event) => {
   const client = clients[id];
@@ -7,19 +7,23 @@ const _notifyClient = (id, event) => {
 };
 
 export const addClient = (id, socket) => {
-  clients[id] = {
-    socket: socket,
-    followers: []
-  };
+  if (!clients[id]) {
+    clients[id] = {
+      socket: socket,
+      followers: []
+    };
+  }
 };
 
 export const follow = (followerId, clientId, event) => { // add follower and notify 'to' client
-  if (!clients[clientId]) {
+  if (!clients[clientId]) { // unconnected clients can still be followed
     addClient(clientId);
   }
 
-  clients[clientId].followers.push(followerId);
-  _notifyClient(clientId, event);
+  if (clientId !== followerId) { // clients cannot follow themselves
+    clients[clientId].followers.push(followerId);
+    _notifyClient(clientId, event);
+  }
 };
 
 export const unfollow = (followerId, clientId) => { // remove follower with no notification
@@ -50,8 +54,8 @@ export const statusUpdate = (clientId, event) => { // notify followers of 'from'
 };
 
 // for testing
-export const size = () => (
-  Object.keys(clients).length
-);
+export const size = () => Object.keys(clients).length;
+
+export const reset = () => clients = {};
 
 export const getClient = id => clients[id];

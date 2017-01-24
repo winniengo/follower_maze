@@ -16,8 +16,10 @@ describe('ClientServer', () => {
   describe('listens for client connections', () => {
     beforeEach(() => {
       server = ClientServer.listen(CLIENT_PORT, ADDRESS);
+      Clients.reset();
     });
 
+    afterEach(() => Clients.reset());
 
     it('accepts single client connection', done => {
       client = new net.Socket().connect(CLIENT_PORT);
@@ -39,7 +41,7 @@ describe('ClientServer', () => {
         client = new net.Socket().connect(CLIENT_PORT);
       }
 
-      chai.expect(ClientsSpy).to.have.been.called;
+      chai.expect(ClientsSpy).to.have.been.called.exactly(10);
       done();
     })
   });

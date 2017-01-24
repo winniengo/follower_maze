@@ -137,7 +137,7 @@ developed on: Node.js, Ruby, JRuby, Haskell, Clojure, Scala, Go, Python,
 Java, and C/C++.*
 
 ### Before submitting your code
-With this document you  received a jar file and a shell script. These
+With this document you received a jar file and a shell script. These
 contain one possible implementation of the *event source* and *user
 client* described previously.
 
