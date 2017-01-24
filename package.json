@@ -7,7 +7,7 @@
     "start": "babel-node --presets es2015 app/index.js",
     "test": "mocha --compilers js:babel-core/register"
   },
-  "author": "Winnie Ngo",
+  "author": "W.N.",
   "license": "MIT",
   "dependencies": {
     "babel-cli": "^6.22.2",
