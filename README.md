@@ -8,6 +8,7 @@ Read more about the specific protocol [here](../instructions##the-protocol).
 ## To Run
 - Clone repo and navigate to the repo's root.
 - Run `npm install` to install these packages specified in the `package.json`:
+
   ```
   babel-cli v.6.22.2,
   babel-preset-es2015: v.6.22.0
@@ -15,6 +16,7 @@ Read more about the specific protocol [here](../instructions##the-protocol).
   chai-spies v0.7.1
   mocha v.2.0
   ```
+  
 - Run `npm start` to start server!
 
 Additional Options:
@@ -67,7 +69,7 @@ const events = data
   .sort((a, b) => a.split('|')[0] - b.split('|')[0]);
 ```
 
-It handles the ordered events using a `switch case` statement on their Type. It parses and sends each event accordingly to relevant clients exactly like read. Learn more about the possible events [here](./instructions.md#the-events)
+It handles the ordered events using a `switch case` statement on their Type. It parses and sends each event accordingly to relevant clients exactly like read. Learn more about the possible events [here](./instructions.md#the-events).
 
 ### `app/client.js`
 Defines a global `clients` object that stores objects representing all the clients that are connected to the server and/or are referenced in events. It also exports functions to modify this object.
@@ -95,12 +97,14 @@ The `clients` object references each client by their `id` and might look somethi
 The functions used by the `EventServer` and `ClientServer` to modify this object are:
 
   + `function addClient(id, socket)` - adds a new key-value pair representing a client to the `clients` object such that:
+  
     ```js
     clients[id] = {
         socket: socket,
         followers: []
       }
     ```
+    
     Client objects are initialized with an empty array of followers.
   + `function follow(followerId, clientId, event)` - adds a new follower to the client's array of followers and notifies them of the event.
   + `function unfollow(followerId, clientId)` - removes a follower from the client's array of followers but does not notify them.
@@ -108,15 +112,16 @@ The functions used by the `EventServer` and `ClientServer` to modify this object
   + `function privateMsg(clientId, event)` - notifies the client of the event.
   + `function statusUpdate(clientId, event)` - notifies all the followers of the client of the event.
 
-NB: Events can reference clients that are *not* connected (ie. `clients[id].socket` is `undefined` ). These clients are added to the `clients` object but **do not receive any notifications** (ie. `clients[id].write` is not called). Any notifications for them are silently ignored. However, they can still be followed and unfollowed.
+**NB**: Events can reference clients that are *not* connected (ie. `clients[id].socket` is `undefined` ). These clients are added to the `clients` object but **do not receive any notifications** (ie. `clients[id].write` is not called). Any notifications for them are silently ignored. However, they can still be followed and unfollowed.
 
 ### `app/index.js`
 
 Defines the default configuration:
+
 ```
 const CLIENT_PORT = 9099;
 const EVENT_PORT = 9090;
 const ADDRESS = '127.0.0.1';
 ```
 
-Starts the `ClientServer` and `EventServer`. Server is now ready to receiving clients and events!
+Starts the `ClientServer` and `EventServer`. Server is ready to receiving clients and events!
