@@ -164,6 +164,14 @@ Unit and integration tests are written across `test`'s three files.
 #### `test/event_server.js`
 #### `test/clients.js`
 
+## Resources
++ [Socket](http://docs.oracle.com/javase/tutorial/networking/sockets/definition.html)
++ [TCP Socket Programming in Node.js](https://www.hacksparrow.com/tcp-socket-programming-in-node-js.html)
++ [Tutorial: TCP Server with Node.js](http://frostybay.com/articles/tcp-server-with-nodejs)
++ [Node.js vs Python – Where to Use and Where not?](https://www.agriya.com/blog/2016/07/13/nodejs-vs-python-where-to-use-and-where-not/)
++ [node.js performance with zeromq vs. Python vs. Java](http://stackoverflow.com/questions/6645796/node-js-performance-with-zeromq-vs-python-vs-java)
+
 ## Future Work
 + More in-depth automated testing
 + Relies on events sent out of order but within a range per stream
++ Add metrics for measurements and performance analysis
