@@ -3,7 +3,7 @@
 
 This repo contains an implementation of a socket server that reads events from one event source and forwards the stream of events to corresponding user clients in the correct order. This system is implemented in Node.js with tests implemented using the JS testing framework [Mocha](http://mochajs.org/) and assertion library [Chai](http://chaijs.com/). Babel is used to transpile code into ES6.
 
-Read more about the specific protocol [here](../instructions##the-protocol).
+Read more about the specific protocol [here](./instructions.md##the-protocol).
 
 ## To Run
 - Clone repo and navigate to the repo's root.
@@ -125,3 +125,7 @@ const ADDRESS = '127.0.0.1';
 ```
 
 Starts the `ClientServer` and `EventServer`. Server is ready to receiving clients and events!
+
+## Future Work
++ More in-depth automated testing
++ Relies on events sent out of order but within a range per stream
