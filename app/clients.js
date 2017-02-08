@@ -36,8 +36,8 @@ export const unfollow = (followerId, clientId) => { // remove follower with no n
 };
 
 export const broadcast = event => { // notify all connected clients
-  for (var key in clients) {
-    _notifyClient(key, event);
+  for (let id in clients) {
+    _notifyClient(id, event);
   }
 };
 

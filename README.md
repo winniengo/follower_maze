@@ -16,7 +16,7 @@ Read more about the specific protocol [here](./instructions.md##the-protocol).
   chai-spies v0.7.1
   mocha v.2.0
   ```
-  
+
 - Run `npm start` to start server!
 
 Additional Options:
@@ -37,12 +37,14 @@ Additional Options:
   - clients.js
 ```
 
+### Server
+
 The logic of the socket server is implemented across `app`'s four files.
 
-### `app/client_server.js`
+#### `app/client_server.js`
 Exports a `ClientServer` that listens on port `9099` for the id's of multiple connecting clients. It adds new clients to a global `clients` object using `addClient` from `./clients`.
 
-### `app/event_server.js`
+#### `app/event_server.js`
 Exports a `EventServer` that listens on port `9090` for events sent by a single event source. It parses the data it receives and handles the five possible event types accordingly (ie. sending each event to the relevant connected client).
 
 For example, the server receives data that might look like this:
@@ -71,7 +73,7 @@ const events = data
 
 It handles the ordered events using a `switch case` statement on their Type. It parses and sends each event accordingly to relevant clients exactly like read. Learn more about the possible events [here](./instructions.md#the-events).
 
-### `app/client.js`
+#### `app/client.js`
 Defines a global `clients` object that stores objects representing all the clients that are connected to the server and/or are referenced in events. It also exports functions to modify this object.
 
 The `clients` object references each client by their `id` and might look something like this:
@@ -97,14 +99,14 @@ The `clients` object references each client by their `id` and might look somethi
 The functions used by the `EventServer` and `ClientServer` to modify this object are:
 
   + `function addClient(id, socket)` - adds a new key-value pair representing a client to the `clients` object such that:
-  
+
     ```js
     clients[id] = {
         socket: socket,
         followers: []
       }
     ```
-    
+
     Client objects are initialized with an empty array of followers.
   + `function follow(followerId, clientId, event)` - adds a new follower to the client's array of followers and notifies them of the event.
   + `function unfollow(followerId, clientId)` - removes a follower from the client's array of followers but does not notify them.
@@ -114,7 +116,7 @@ The functions used by the `EventServer` and `ClientServer` to modify this object
 
 **NB**: Events can reference clients that are *not* connected (ie. `clients[id].socket` is `undefined` ). These clients are added to the `clients` object but **do not receive any notifications** (ie. `clients[id].write` is not called). Any notifications for them are silently ignored. However, they can still be followed and unfollowed.
 
-### `app/index.js`
+#### `app/index.js`
 
 Defines the default configuration:
 
@@ -125,6 +127,20 @@ const ADDRESS = '127.0.0.1';
 ```
 
 Starts the `ClientServer` and `EventServer`. Server is ready to receiving clients and events!
+
+### Tests
+
+Automated test are implemented using:
++ the JS testing framework [Mocha](http://mochajs.org/)
++ and assertion library [Chai](http://chaijs.com/).
+
+Unit and integration tests are written across `test`'s three files.
+
+**NB**: They are run in not pre-determined order.
+
+#### `test/client_server.js`
+#### `test/event_server.js`
+#### `test/clients.js`
 
 ## Future Work
 + More in-depth automated testing
